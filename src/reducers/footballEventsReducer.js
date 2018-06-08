@@ -3,7 +3,8 @@ import {
   FINISHED_FETCHING_EVENTS,
   ERROR_FETCHING_EVENTS,
   SELECT_EVENT,
-  TOGGLE_PRICE_FORMAT
+  TOGGLE_PRICE_FORMAT,
+  TOGGLE_PRIMARY_MARKET
 } from '../constants/actionTypes';
 
 const initialState = {
@@ -11,7 +12,8 @@ const initialState = {
   footballEvents: [],
   error: null,
   selectedFootballEventId: undefined,
-  isDecimalFormat: true
+  isDecimalFormat: true,
+  showPrimaryMarket: false
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -40,6 +42,11 @@ export default (state = initialState, { type, payload }) => {
     return {
       ...state,
       isDecimalFormat: !state.isDecimalFormat
+    };
+  case TOGGLE_PRIMARY_MARKET:
+    return {
+      ...state,
+      showPrimaryMarket: !state.showPrimaryMarket
     };
   default:
     return state;

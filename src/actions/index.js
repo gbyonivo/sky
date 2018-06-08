@@ -3,7 +3,8 @@ import {
   FINISHED_FETCHING_EVENTS,
   ERROR_FETCHING_EVENTS,
   SELECT_EVENT,
-  TOGGLE_PRICE_FORMAT
+  TOGGLE_PRICE_FORMAT,
+  TOGGLE_PRIMARY_MARKET
 } from '../constants/actionTypes';
 import { attachPricesToEvents } from '../functions';
 
@@ -29,4 +30,9 @@ export const selectFootballEvent = eventId => ({
 export const togglePriceFormat = isDecimalFormat => ({
   type: TOGGLE_PRICE_FORMAT,
   payload: { isDecimalFormat }
+});
+
+export const toggleShowPrimaryMark = showPrimaryMarket => ({
+  type: TOGGLE_PRIMARY_MARKET,
+  payload: { showPrimaryMarket }
 });

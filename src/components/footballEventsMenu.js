@@ -5,11 +5,13 @@ import PropTypes from 'prop-types';
 import * as actions from '../actions';
 import FootballEventsMenuItem from './footballEventsMenuItem';
 import PriceFormatToggle from './priceFormatToggle';
+import ShowPrimaryMarketToggle from './showPrimaryMarketToggle';
 
 const FootballEventsMenu = ({ footballEvents }) =>
   <div>
     <h2>Football Events</h2>
     <PriceFormatToggle/>
+    <ShowPrimaryMarketToggle/>
     <ul>
       {footballEvents.map(footballEvent =>
         <FootballEventsMenuItem key={footballEvent.eventId} footballEvent={footballEvent} />)}
