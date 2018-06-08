@@ -2,20 +2,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import * as actions from '../actions';
 
-const PriceToggle = () =>
-  <div></div>;
+const PriceFormatToggle = ({ isDecimalFormat, togglePriceFormat }) =>
+  <div onClick={togglePriceFormat}>
+    {isDecimalFormat ? 'decimal' : 'fraction'}
+  </div>;
 
-PriceToggle.defaultProps = {
+PriceFormatToggle.defaultProps = {
   isDecimalFormat: true
 };
 
-PriceToggle.propTypes = {
-  isDecimalFormat: PropTypes.bool.isRequired
+PriceFormatToggle.propTypes = {
+  isDecimalFormat: PropTypes.bool.isRequired,
+  togglePriceFormat: PropTypes.func.isRequired
 };
 
-const mapStateToProps = () => ({});
+const mapStateToProps = ({ footballEventsReducer: { isDecimalFormat } }) => ({
+  isDecimalFormat
+});
 
-const mapActionsToProps = () => ({});
+const mapActionsToProps = dispatch => ({
+  togglePriceFormat: compose(dispatch, actions.togglePriceFormat)
+});
 
-export default connect(mapStateToProps, mapActionsToProps)(PriceToggle);
+export default connect(mapStateToProps, mapActionsToProps)(PriceFormatToggle);

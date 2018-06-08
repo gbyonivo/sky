@@ -4,10 +4,12 @@ import { compose } from 'redux';
 import PropTypes from 'prop-types';
 import * as actions from '../actions';
 import FootballEventsMenuItem from './footballEventsMenuItem';
+import PriceFormatToggle from './priceFormatToggle';
 
 const FootballEventsMenu = ({ footballEvents }) =>
   <div>
     <h2>Football Events</h2>
+    <PriceFormatToggle/>
     <ul>
       {footballEvents.map(footballEvent =>
         <FootballEventsMenuItem key={footballEvent.eventId} footballEvent={footballEvent} />)}

@@ -1,10 +1,17 @@
-import { FETCH_FOOTBALL_EVENTS, FINISHED_FETCHING_EVENTS, ERROR_FETCHING_EVENTS, SELECT_EVENT } from '../constants/actionTypes';
+import {
+  FETCH_FOOTBALL_EVENTS,
+  FINISHED_FETCHING_EVENTS,
+  ERROR_FETCHING_EVENTS,
+  SELECT_EVENT,
+  TOGGLE_PRICE_FORMAT
+} from '../constants/actionTypes';
 
 const initialState = {
   isFetching: false,
   footballEvents: [],
   error: null,
-  selectedFootballEventId: undefined
+  selectedFootballEventId: undefined,
+  isDecimalFormat: true
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -28,6 +35,11 @@ export default (state = initialState, { type, payload }) => {
     return {
       ...state,
       selectedFootballEventId: payload.eventId
+    };
+  case TOGGLE_PRICE_FORMAT:
+    return {
+      ...state,
+      isDecimalFormat: !state.isDecimalFormat
     };
   default:
     return state;

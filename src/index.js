@@ -7,7 +7,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import FootballEventsMenu from './components/footballEventsMenu';
 
 import reducer from './reducers';
-import mySaga from './sagas/footballEventsSagas';
+import rootSaga from './sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
@@ -18,7 +18,7 @@ const store = createStore(
     window.devToolsExtension ? window.devToolsExtension() : f => f //eslint-disable-line
   )
 );
-sagaMiddleware.run(mySaga);
+sagaMiddleware.run(rootSaga);
 
 
 ReactDOM.render(<Provider store={store}>
