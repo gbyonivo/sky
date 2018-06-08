@@ -1,4 +1,4 @@
-import { FETCH_FOOTBALL_EVENTS, FINISHED_FETCHING_EVENTS, ERROR_FETCHING_EVENTS } from '../constants/actionTypes';
+import { FETCH_FOOTBALL_EVENTS, FINISHED_FETCHING_EVENTS, ERROR_FETCHING_EVENTS, SELECT_EVENT } from '../constants/actionTypes';
 
 const initialState = {
   isFetching: false,
@@ -23,6 +23,11 @@ export default (state = initialState, { type, payload }) => {
     return {
       ...state,
       error: payload.error
+    };
+  case SELECT_EVENT:
+    return {
+      ...state,
+      selectedFootballEventId: payload.eventId
     };
   default:
     return state;
