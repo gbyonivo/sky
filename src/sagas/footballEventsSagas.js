@@ -1,17 +1,13 @@
-import { call, put, all } from 'redux-saga/effects';
-import { fetchFootballEventsFromApi } from '../api/apiService';
+import { call, put, all, takeLatest } from 'redux-saga/effects';
+import { fetchFootballEventsFromApi, fetchFootballEventFromApi } from '../api/apiService';
 import {
   finishedFetchingFootballEvents,
   errorFetchingFootballEvents,
-  // selectFootballEvent,
-  // togglePriceFormat
+  finishedFetchingFootballEvent,
 } from '../actions';
-// import {
-//   SELECT_EVENT,
-//   TOGGLE_PRICE_FORMAT
-// } from '../constants/actionTypes';
+import { FETCH_FOOTBALL_EVENT } from '../constants/actionTypes';
 
-export function* fetchFootballEventsSaga() { // eslint-disable-line
+export function* fetchFootballEventsSaga() {
   try {
     const data = yield call(fetchFootballEventsFromApi);
     yield put(finishedFetchingFootballEvents(data.events, data.markets, data.outcomes));
@@ -20,19 +16,19 @@ export function* fetchFootballEventsSaga() { // eslint-disable-line
   }
 }
 
-// export function* selectFootballEventSaga(c) {
-//   console.log('benz', c);
-//   yield put(selectFootballEvent(c));
-// }
-
-// export function* togglePriceFormatSaga() {
-//   yield takeEvery(TOGGLE_PRICE_FORMAT, togglePriceFormat);
-// }
+export function* fetchFootballEventSaga({ payload: { eventId } }) {
+  try {
+    const data = yield call(fetchFootballEventFromApi, eventId);
+    yield put(finishedFetchingFootballEvent(data));
+  } catch (error) {
+    yield put(errorFetchingFootballEvents(error));
+  }
+}
 
 export function* sagas() {
   yield all([
     call(fetchFootballEventsSaga),
-    // takeEvery(SELECT_EVENT, selectFootballEventSaga),
+    takeLatest(FETCH_FOOTBALL_EVENT, fetchFootballEventSaga),
   ]);
 }
 

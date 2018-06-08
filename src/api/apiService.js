@@ -5,3 +5,8 @@ export const fetchFootballEventsFromApi = () => // eslint-disable-line
   axios
     .get(`${HOST}:${PORT}/football/live`, { params: { primaryMarkets: true } })
     .then(response => response.data);
+
+export const fetchFootballEventFromApi = eventId => // eslint-disable-line
+  axios
+    .get(`${HOST}:${PORT}/sportsbook/event/${eventId}`)
+    .then(response => response.data);

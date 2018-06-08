@@ -8,6 +8,7 @@ import FootballEventsMenu from './components/footballEventsMenu';
 
 import reducer from './reducers';
 import rootSaga from './sagas';
+import footballEventDetails from './components/footballEventDetails';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
@@ -25,6 +26,7 @@ ReactDOM.render(<Provider store={store}>
   <BrowserRouter>
     <div>
       <Route path="/" component={FootballEventsMenu} />
+      <Route path="/event/:id" component={footballEventDetails} />
     </div>
   </BrowserRouter>
 </Provider>, document.getElementById('index')); //eslint-disable-line
