@@ -6,7 +6,9 @@ import {
   TOGGLE_PRICE_FORMAT,
   TOGGLE_PRIMARY_MARKET,
   FETCH_FOOTBALL_EVENT,
-  FINISHED_FETCHING_EVENT
+  FINISHED_FETCHING_EVENT,
+  FINISHED_FETCHING_MARKET,
+  FETCH_MARKET
 } from '../constants/actionTypes';
 
 const initialState = {
@@ -17,7 +19,8 @@ const initialState = {
   error: null,
   selectedFootballEventId: undefined,
   isDecimalFormat: true,
-  showPrimaryMarket: false
+  showPrimaryMarket: false,
+  marketsBeingFetched: []
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -63,6 +66,25 @@ export default (state = initialState, { type, payload }) => {
     return {
       ...state,
       showPrimaryMarket: !state.showPrimaryMarket
+    };
+  case FETCH_MARKET:
+    return {
+      ...state,
+      marketsBeingFetched: [...state.marketsBeingFetched, payload.marketId]
+    };
+  case FINISHED_FETCHING_MARKET:
+    return {
+      ...state,
+      footballEventData: {
+        ...state.footballEventData,
+        ...{
+          outcomes: {
+            ...state.footballEventData.outcomes,
+            ...payload.data.outcomes
+          }
+        }
+      },
+      marketsBeingFetched: state.marketsBeingFetched.filter(marketId => marketId !== payload.data.market.marketId)
     };
   default:
     return state;

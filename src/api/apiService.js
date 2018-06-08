@@ -10,3 +10,8 @@ export const fetchFootballEventFromApi = eventId => // eslint-disable-line
   axios
     .get(`${HOST}:${PORT}/sportsbook/event/${eventId}`)
     .then(response => response.data);
+
+export const fetchMarketFromApi = marketId => // eslint-disable-line
+  axios
+    .get(`${HOST}:${PORT}/sportsbook/market/${marketId}`)
+    .then(response => response.data);

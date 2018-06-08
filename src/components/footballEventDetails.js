@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import * as actions from '../actions';
 import Loading from './loading';
+import Markets from './markets';
 
 class FootballEventDetails extends Component {
   componentDidMount() {
@@ -16,7 +17,7 @@ class FootballEventDetails extends Component {
     }
   }
   render() {
-    const { footballEventData, isFetchingFootballEvent } = this.props;
+    const { footballEventData, isFetchingFootballEvent, match: { params: { id } } } = this.props;
     return (<div>
       <h2>Event Details</h2>
       {
@@ -24,6 +25,7 @@ class FootballEventDetails extends Component {
           ? <Loading />
           : <div>
             details: {footballEventData.event.name}
+            <Markets eventId={parseInt(id, 10)}/>
           </div>
       }
     </div>);

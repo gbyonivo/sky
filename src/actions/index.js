@@ -7,7 +7,10 @@ import {
   ERROR_FETCHING_EVENT,
   SELECT_EVENT,
   TOGGLE_PRICE_FORMAT,
-  TOGGLE_PRIMARY_MARKET
+  TOGGLE_PRIMARY_MARKET,
+  FINISHED_FETCHING_MARKET,
+  FETCH_MARKET,
+  ERROR_FETCHING_MARKET
 } from '../constants/actionTypes';
 import { attachPricesToEvents } from '../functions';
 
@@ -53,4 +56,19 @@ export const fetchFootballEvent = eventId => ({
 export const finishedFetchingFootballEvent = data => ({
   type: FINISHED_FETCHING_EVENT,
   payload: { data }
+});
+
+export const fetchMarket = marketId => ({
+  type: FETCH_MARKET,
+  payload: { marketId }
+});
+
+export const finishedFetchingMarket = data => ({
+  type: FINISHED_FETCHING_MARKET,
+  payload: { data }
+});
+
+export const errorFetchingMarket = error => ({
+  type: ERROR_FETCHING_MARKET,
+  payload: { error }
 });

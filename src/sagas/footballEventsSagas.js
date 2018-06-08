@@ -1,11 +1,13 @@
-import { call, put, all, takeLatest } from 'redux-saga/effects';
-import { fetchFootballEventsFromApi, fetchFootballEventFromApi } from '../api/apiService';
+import { call, put, all, takeLatest, takeEvery } from 'redux-saga/effects';
+import { fetchFootballEventsFromApi, fetchFootballEventFromApi, fetchMarketFromApi } from '../api/apiService';
 import {
   finishedFetchingFootballEvents,
   errorFetchingFootballEvents,
   finishedFetchingFootballEvent,
+  finishedFetchingMarket,
+  errorFetchingMarket,
 } from '../actions';
-import { FETCH_FOOTBALL_EVENT } from '../constants/actionTypes';
+import { FETCH_FOOTBALL_EVENT, FETCH_MARKET } from '../constants/actionTypes';
 
 export function* fetchFootballEventsSaga() {
   try {
@@ -25,10 +27,20 @@ export function* fetchFootballEventSaga({ payload: { eventId } }) {
   }
 }
 
+export function* fetchMarketSaga({ payload: { marketId } }) {
+  try {
+    const data = yield call(fetchMarketFromApi, marketId);
+    yield put(finishedFetchingMarket(data));
+  } catch (error) {
+    yield put(errorFetchingMarket(error, marketId));
+  }
+}
+
 export function* sagas() {
   yield all([
     call(fetchFootballEventsSaga),
     takeLatest(FETCH_FOOTBALL_EVENT, fetchFootballEventSaga),
+    takeEvery(FETCH_MARKET, fetchMarketSaga)
   ]);
 }
 

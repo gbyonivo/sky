@@ -6,31 +6,40 @@ import * as actions from '../actions';
 import FootballEventsMenuItem from './footballEventsMenuItem';
 import PriceFormatToggle from './priceFormatToggle';
 import ShowPrimaryMarketToggle from './showPrimaryMarketToggle';
+import { selectGroupedFootballEvents, selectIsFetching, selectError } from '../selectors';
 
-const FootballEventsMenu = ({ footballEvents }) =>
+const FootballEventsMenu = ({ groupedFootballEvents }) =>
   <div>
     <h2>Football Events</h2>
-    <PriceFormatToggle/>
-    <ShowPrimaryMarketToggle/>
-    <ul>
-      {footballEvents.map(footballEvent =>
-        <FootballEventsMenuItem key={footballEvent.eventId} footballEvent={footballEvent} />)}
-    </ul>
+    <PriceFormatToggle />
+    <ShowPrimaryMarketToggle />
+    {
+      Object.keys(groupedFootballEvents).map(key =>
+        <div key={key}>
+          <h2>{key}</h2>
+          <ul>
+            {
+              groupedFootballEvents[key].map(footballEvent =>
+                <FootballEventsMenuItem key={footballEvent.eventId} footballEvent={footballEvent} />)
+            }
+          </ul>
+        </div>)
+    }
   </div>;
 
 FootballEventsMenu.defaultProps = {
-  footballEvents: []
+  groupedFootballEvents: {}
 };
 
 FootballEventsMenu.propTypes = {
-  footballEvents: PropTypes.array.isRequired,
+  groupedFootballEvents: PropTypes.object.isRequired,
   fetchFootballEvents: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ footballEventsReducer: { footballEvents, isFetching, error } }) => ({
-  footballEvents,
-  isFetching,
-  error
+const mapStateToProps = state => ({
+  groupedFootballEvents: selectGroupedFootballEvents(state),
+  isFetching: selectIsFetching(state),
+  error: selectError(state)
 });
 
 const mapActionsToProps = dispatch => ({
