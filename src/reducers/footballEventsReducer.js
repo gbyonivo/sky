@@ -18,7 +18,7 @@ const initialState = {
   footballEventData: {},
   error: null,
   selectedFootballEventId: undefined,
-  isDecimalFormat: true,
+  isDecimalFormat: false,
   showPrimaryMarket: false,
   marketsBeingFetched: []
 };

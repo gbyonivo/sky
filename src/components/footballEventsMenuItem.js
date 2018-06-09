@@ -6,9 +6,9 @@ import Price from './price';
 
 import styles from './footballEventsMenuItem.scss';
 
-const FootballEventsMenuItem = ({ footballEvent, showPrimaryMarket }) =>
+const FootballEventsMenuItem = ({ footballEvent, showPrimaryMarket, hideList }) =>
   <li className={styles.footballEventsMenuItem}>
-    <Link to={`/event/${footballEvent.eventId}`}>
+    <Link to={`/event/${footballEvent.eventId}`} onClick={hideList}>
       <div className={styles.footballEventsMenuItemName}>{footballEvent.name}</div>
       {showPrimaryMarket
         ? <div className={styles.footballEventsMenuItemPrices}>
@@ -23,6 +23,7 @@ const FootballEventsMenuItem = ({ footballEvent, showPrimaryMarket }) =>
 
 FootballEventsMenuItem.propTypes = {
   footballEvent: PropTypes.object.isRequired,
+  hideList: PropTypes.func.isRequired,
   showPrimaryMarket: PropTypes.bool.isRequired
 };
 

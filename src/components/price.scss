@@ -8,9 +8,9 @@
   }
   .priceValue{
     margin-left: 5px;
-    background: #020231;
+    background-image: linear-gradient(#eeeeee, #fff);
     padding: 10px 3px;
-    color: #fff;
+    color: red;
     width: 100px;
     height: 20px;
     text-align: center;
@@ -24,6 +24,9 @@
   .priceValue, .text{
     float: left;
   }
+  &.win-draw-win{
+
+  }
 }
 
 .price.short{
@@ -32,13 +35,27 @@
     background: #e1e1e1;
   }
   .priceValue{
-    background: #020231;
+    background-image: linear-gradient(#eeeeee, #fff);
     padding: 4px 3px;
-    color: #fff;
+    color: red;
     text-align: center;
   }
   .text{
-    font-size: 12px;
+    font-size: 14px;
     padding: 3px 3px;
+  }
+}
+
+.price.correctScore{
+  padding-top: 5px;
+  &:hover{
+    background: #e1e1e1;
+  }
+  .priceValue{
+    margin-left: 10px;
+    color: red;
+  }
+  .text{
+    font-size: 12px;
   }
 }

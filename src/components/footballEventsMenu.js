@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
@@ -9,27 +9,53 @@ import ShowPrimaryMarketToggle from './showPrimaryMarketToggle';
 import { selectGroupedFootballEvents, selectIsFetching, selectError } from '../selectors';
 
 import styles from './footballEventsMenu.scss';
+import { getIsViewingEvent } from '../functions';
 
-const FootballEventsMenu = ({ groupedFootballEvents }) =>
-  <div className={styles.footballEventsMenu}>
-    <h2 className={styles.footballEventsMenuHeader}>Football Events</h2>
-    <PriceFormatToggle />
-    <ShowPrimaryMarketToggle />
-    <div className={styles.footballEventsGroups}>
+class FootballEventsMenu extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isExpanded: !getIsViewingEvent()
+    };
+    this.toggle = this.toggle.bind(this);
+  }
+  toggle() {
+    this.setState(state => ({ isExpanded: !state.isExpanded }));
+  }
+  render() {
+    const { groupedFootballEvents } = this.props;
+    const { isExpanded } = this.state;
+    const isViewingEvent = getIsViewingEvent();
+    return (<div className={`
+      ${styles.footballEventsMenu}
+      ${isExpanded ? styles.isExpanded : styles.isCollapsed}
+      ${isViewingEvent ? '' : styles.onlyListOnScreen}`
+    }>
       {
-        Object.keys(groupedFootballEvents).map(key =>
-          <div key={key} className={styles.group}>
-            <h4 className={styles.groupHeader}>{key}</h4>
-            <ul className={styles.groupList}>
-              {
-                groupedFootballEvents[key].map(footballEvent =>
-                  <FootballEventsMenuItem key={footballEvent.eventId} footballEvent={footballEvent} />)
-              }
-            </ul>
-          </div>)
+        isViewingEvent
+          ? <div onClick={this.toggle} className={styles.toggle}>Live Events</div>
+          : null
       }
-    </div>
-  </div>;
+      <h2 className={styles.footballEventsMenuHeader}>Football Events</h2>
+      <PriceFormatToggle />
+      <ShowPrimaryMarketToggle />
+      <div className={styles.footballEventsGroups}>
+        {
+          Object.keys(groupedFootballEvents).map(key =>
+            <div key={key} className={styles.group}>
+              <h4 className={styles.groupHeader}>{key}</h4>
+              <ul className={styles.groupList}>
+                {
+                  groupedFootballEvents[key].map(footballEvent =>
+                    <FootballEventsMenuItem key={footballEvent.eventId} footballEvent={footballEvent} hideList={this.toggle}/>)
+                }
+              </ul>
+            </div>)
+        }
+      </div>
+    </div>);
+  }
+}
 
 FootballEventsMenu.defaultProps = {
   groupedFootballEvents: {}

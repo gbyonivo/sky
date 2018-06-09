@@ -6,6 +6,15 @@
   width: 300px;
   color: #fff;
   background: #020231;
+  transition: left 0.5s ease;
+  z-index: 10;
+  &.onlyListOnScreen{
+    width: 50%;
+    left: 25%;
+  }
+  .toggle{
+    display: none;
+  }
   .footballEventsMenuHeader{
     text-align: center;
     margin: 0;
@@ -14,7 +23,7 @@
     font-weight: bold;
   }
   .footballEventsGroups{
-    height: calc(100% - 100px);
+    height: calc(100% - 150px);
     overflow: auto;
     .group{
       padding: 5px;
@@ -32,6 +41,40 @@
         padding: 0;
       }
     }
+  } 
+}
+
+@media screen and (max-width: 768px) {
+  .footballEventsMenu{
+    width: 100%;
+    z-index: 5;
+    &.onlyListOnScreen{
+      width: 100%;
+      left: 0%;
+    }
+    .toggle{
+      display: block;
+      height: 30px;
+      padding: 5px 5px;
+      cursor: pointer;
+      &::before{
+        content: "\2630";
+        font-size: 16px;
+        margin-right: 5px;
+      }
+      &:hover{
+        color: #36d836;
+      }
+    }
+    &.isExpanded{
+      height: 100%;
+      transition: height ease 1s; 
+    }
+    &.isCollapsed{
+      height: 30px;
+      top: 0;
+      overflow: hidden;
+      transition: height ease 1s; 
+    }
   }
-  
 }

@@ -9,7 +9,7 @@ const Price = ({
 }) =>
   <div className={`${styles.price} ${styles[type]} ${className}`}>
     <span className={styles.text}>{suffixText}</span>
-    <span className={styles.priceValue}>{isDecimalFormat ? (Math.round(price.decimal * 100) / 100) : `${price.num}/${price.den}`}</span>
+    <span className={styles.priceValue}>{(isDecimalFormat) ? (Math.round(price.decimal * 100) / 100) : `${price.num}/${price.den}`}</span>
   </div>;
 
 Price.defaultProps = {

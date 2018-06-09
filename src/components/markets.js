@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { selectMarkets } from '../selectors';
-import Outcomes from './outcomes';
+import Market from './market';
 
 import styles from './markets.scss';
 
 const Markets = ({ markets }) =>
   <div className={styles.markets}>{
     markets.map(market =>
-      <Outcomes market={market} key={market.marketId}/>)
+      <Market market={market} key={market.marketId}/>)
   }</div>;
 
 Markets.defaultProps = {
