@@ -4,15 +4,17 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Price from './price';
 
+import styles from './footballEventsMenuItem.scss';
+
 const FootballEventsMenuItem = ({ footballEvent, showPrimaryMarket }) =>
-  <li>
+  <li className={styles.footballEventsMenuItem}>
     <Link to={`/event/${footballEvent.eventId}`}>
-      <div>{footballEvent.name}</div>
+      <div className={styles.footballEventsMenuItemName}>{footballEvent.name}</div>
       {showPrimaryMarket
-        ? <div>
-          <span><Price price={footballEvent.prices.home} suffixText="Win" /></span>
-          <span><Price price={footballEvent.prices.draw} suffixText="Draw" /></span>
-          <span><Price price={footballEvent.prices.away} suffixText="Win" /></span>
+        ? <div className={styles.footballEventsMenuItemPrices}>
+          <div className={styles.price}><Price price={footballEvent.prices.home} suffixText="Win" type={'short'} /></div>
+          <div className={styles.price}><Price price={footballEvent.prices.draw} suffixText="Draw" type={'short'} /></div>
+          <div className={styles.price}><Price price={footballEvent.prices.away} suffixText="Win" type={'short'} /></div>
         </div>
         : null
       }

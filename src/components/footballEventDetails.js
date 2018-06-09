@@ -6,6 +6,8 @@ import * as actions from '../actions';
 import Loading from './loading';
 import Markets from './markets';
 
+import styles from './footballEventDetails.scss';
+
 class FootballEventDetails extends Component {
   componentDidMount() {
     const { fetchFootballEvent, match } = this.props;
@@ -18,15 +20,18 @@ class FootballEventDetails extends Component {
   }
   render() {
     const { footballEventData, isFetchingFootballEvent, match: { params: { id } } } = this.props;
-    return (<div>
-      <h2>Event Details</h2>
+    return (<div className={styles.footballEventDetails}>
+      <h2 className={styles.footballEventDetailsHeader}>
+        {
+          isFetchingFootballEvent || !footballEventData.event
+            ? 'Event Details'
+            : footballEventData.event.name
+        }
+      </h2>
       {
         isFetchingFootballEvent || !footballEventData.event
           ? <Loading />
-          : <div>
-            details: {footballEventData.event.name}
-            <Markets eventId={parseInt(id, 10)}/>
-          </div>
+          : <Markets eventId={parseInt(id, 10)} />
       }
     </div>);
   }

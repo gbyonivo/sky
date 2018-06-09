@@ -9,6 +9,7 @@ import FootballEventsMenu from './components/footballEventsMenu';
 import reducer from './reducers';
 import rootSaga from './sagas';
 import footballEventDetails from './components/footballEventDetails';
+import './index.scss';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(

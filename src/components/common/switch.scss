@@ -1,0 +1,27 @@
+.switch{
+  width: 40px;
+  height: 20px;
+  // border-radius: 35%;
+  position: relative;
+  cursor: pointer;
+  &.on{
+    background: green;
+  }
+  &.off{
+    background: red;
+  }
+  .ball{
+    width: 20px;
+    height: 20px;;
+    // border-radius: 50%;
+    background: #ccc;
+    position: absolute;
+    transition: left ease 0.2s;
+    &.left{
+      left: 0;
+    }
+    &.right{
+      right: 0;
+    }
+  }
+}

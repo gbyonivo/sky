@@ -1,0 +1,23 @@
+.footballEventsMenuItem{
+  margin: 5px 0;
+  background-image: linear-gradient(rgb(240, 240, 240), #fff);
+  font-size: 12px;
+  min-height: 25px;
+  a{
+    text-decoration: none;
+    text-align: center;
+    .footballEventsMenuItemName{
+      padding: 5px 0 5px 0;
+    }
+  }
+  .footballEventsMenuItemPrices{
+    height: 30px;
+    width: 100%;
+    padding-left: 5%;
+    .price{
+      float: left;
+      text-align: center;
+      width: 30%;
+    }
+  }
+}

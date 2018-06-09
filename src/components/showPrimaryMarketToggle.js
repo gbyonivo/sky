@@ -4,9 +4,13 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import * as actions from '../actions';
 
+import styles from './showPrimaryMarketToggle.scss';
+import Switch from './common/switch';
+
 const ShowPrimaryMarkToggle = ({ showPrimaryMarket, toggleShowPrimaryMark }) =>
-  <div onClick={toggleShowPrimaryMark}>
-    {showPrimaryMarket ? 'market-show' : 'market-hide'}
+  <div className={styles.showPrimaryMarketToggle}>
+    <div className={styles.text}>Display Primary Market</div>
+    <Switch value={showPrimaryMarket} onClick={toggleShowPrimaryMark} className={styles.toggle}/>
   </div>;
 
 ShowPrimaryMarkToggle.defaultProps = {

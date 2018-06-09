@@ -1,0 +1,44 @@
+.price.long{
+  border-top: rgba(204, 204, 204, 0.659) 0.5px solid;
+  height: 40px;
+  width: 100%;
+  margin-bottom: 4px;
+  &:hover{
+    background: #e1e1e1;
+  }
+  .priceValue{
+    margin-left: 5px;
+    background: #020231;
+    padding: 10px 3px;
+    color: #fff;
+    width: 100px;
+    height: 20px;
+    text-align: center;
+  }
+  .text{
+    font-size: 14px;
+    padding: 10px 10px;
+    width: calc(100% - 132px);
+    font-weight: bolder;
+  }
+  .priceValue, .text{
+    float: left;
+  }
+}
+
+.price.short{
+  padding-top: 5px;
+  &:hover{
+    background: #e1e1e1;
+  }
+  .priceValue{
+    background: #020231;
+    padding: 4px 3px;
+    color: #fff;
+    text-align: center;
+  }
+  .text{
+    font-size: 12px;
+    padding: 3px 3px;
+  }
+}
