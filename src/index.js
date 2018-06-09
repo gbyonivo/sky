@@ -5,7 +5,6 @@ import createSagaMiddleware from 'redux-saga';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 import FootballEventsMenu from './components/footballEventsMenu';
-
 import reducer from './reducers';
 import rootSaga from './sagas';
 import footballEventDetails from './components/footballEventDetails';
@@ -21,7 +20,6 @@ const store = createStore(
   )
 );
 sagaMiddleware.run(rootSaga);
-
 
 ReactDOM.render(<Provider store={store}>
   <BrowserRouter>

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { selectIsFetchingMarket, selectOutcomes } from '../selectors';
+import { selectIsFetchingMarket, selectMarketOutcomes } from '../selectors';
 import Loading from './loading';
 import * as actions from '../actions';
 import Outcomes from './outcomes';
@@ -51,7 +51,7 @@ Market.propTypes = {
 
 const mapStateToProps = (state, props) =>
   ({
-    outcomes: selectOutcomes(state, props.market.marketId),
+    outcomes: selectMarketOutcomes(state, props.market.marketId),
     isFetchingMarket: selectIsFetchingMarket(state, props.market.marketId)
   });
 

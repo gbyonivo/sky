@@ -59,3 +59,17 @@
     font-size: 12px;
   }
 }
+
+.price.short, .price.long, .price.correctScore{
+  &.suspended{
+    .text{
+      color: #e1dfdf;
+    }
+    .priceValue{
+      margin-left: 5px;
+      background: #eeeeee;
+      padding: 10px 3px;
+      color: #ccc;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { selectMarkets } from '../selectors';
+import { selectEventMarkets } from '../selectors';
 import Market from './market';
 
 import styles from './markets.scss';
@@ -22,6 +22,6 @@ Markets.propTypes = {
 };
 
 const mapStateToProps = (state, props) =>
-  ({ markets: selectMarkets(state, props.eventId) });
+  ({ markets: selectEventMarkets(state, props.eventId) });
 
 export default connect(mapStateToProps)(Markets);

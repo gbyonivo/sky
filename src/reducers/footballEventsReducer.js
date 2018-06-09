@@ -8,14 +8,19 @@ import {
   FETCH_FOOTBALL_EVENT,
   FINISHED_FETCHING_EVENT,
   FINISHED_FETCHING_MARKET,
-  FETCH_MARKET
+  FETCH_MARKET,
+  OUTCOME_STATUS,
+  PRICE_CHANGE,
+  MARKET_STATUS
 } from '../constants/actionTypes';
 
 const initialState = {
   isFetching: false,
   isFetchingFootballEvent: false,
   footballEvents: [],
-  footballEventData: {},
+  event: {},
+  outcomes: {},
+  markets: {},
   error: null,
   selectedFootballEventId: undefined,
   isDecimalFormat: false,
@@ -23,71 +28,118 @@ const initialState = {
   marketsBeingFetched: []
 };
 
-export default (state = initialState, { type, payload }) => {
-  switch (type) {
-  case FETCH_FOOTBALL_EVENTS:
-    return {
-      ...state,
-      isFetching: true
-    };
-  case FINISHED_FETCHING_EVENTS:
-    return {
-      ...state,
-      footballEvents: payload.events,
-      isFetching: false
-    };
-  case FETCH_FOOTBALL_EVENT:
-    return {
-      ...state,
-      isFetchingFootballEvent: true
-    };
-  case FINISHED_FETCHING_EVENT:
-    return {
-      ...state,
-      footballEventData: payload.data,
+const ACTION_HANDLERS = {
+
+  [FETCH_FOOTBALL_EVENTS]: state => ({ ...state, isFetching: true }),
+
+  [FINISHED_FETCHING_EVENTS]: (state, { payload }) => ({
+    ...state,
+    footballEvents: payload.events,
+    outcomes: { ...state.outcomes, ...payload.outcomes },
+    markets: { ...state.markets, ...payload.markets },
+    isFetching: false
+  }),
+
+  [FETCH_FOOTBALL_EVENT]: state => ({ ...state, isFetchingFootballEvent: true }),
+
+  [FINISHED_FETCHING_EVENT]: (state, { payload }) => ({
+    ...state,
+    ...{
+      event: payload.data.event,
+      outcomes: { ...state.outcomes, ...payload.data.outcomes },
+      markets: { ...state.markets, ...payload.data.markets },
       isFetchingFootballEvent: false
-    };
-  case ERROR_FETCHING_EVENTS:
+    }
+  }),
+
+  [ERROR_FETCHING_EVENTS]: (state, { payload }) => ({ ...state, error: payload.error }),
+
+  [SELECT_EVENT]: (state, { payload }) => ({ ...state, selectedFootballEventId: payload.eventId }),
+
+  [TOGGLE_PRICE_FORMAT]: state => ({ ...state, isDecimalFormat: !state.isDecimalFormat }),
+
+  [TOGGLE_PRIMARY_MARKET]: state => ({ ...state, showPrimaryMarket: !state.showPrimaryMarket }),
+
+  [FETCH_MARKET]: (state, { payload }) => ({ ...state, marketsBeingFetched: [...state.marketsBeingFetched, payload.marketId] }),
+
+  [FINISHED_FETCHING_MARKET]: (state, { payload }) => ({
+    ...state,
+    outcomes: {
+      ...state.outcomes,
+      ...payload.data.outcomes
+    },
+    marketsBeingFetched: state.marketsBeingFetched.filter(marketId => marketId !== payload.data.market.marketId)
+  }),
+
+  [PRICE_CHANGE]: (
+    state,
+    {
+      payload: {
+        status, marketId, eventId, outcomeId, price
+      }
+    }
+  ) => {
+    const marketIndex = state.markets[eventId].findIndex(market => market.marketId === marketId);
+    const newMarket = { ...state.markets[eventId][marketIndex], ...{ status } };
+    const marketsClone = [...state.markets[eventId]];
+    marketsClone[marketIndex] = newMarket;
+
+    const outcomeIndex = state.outcomes[marketId].findIndex(outcome => outcome.outcomeId === outcomeId);
+    const newOutcome = { ...state.outcomes[marketId][outcomeIndex], ...{ price } };
+    const outcomesClone = [...(state.outcomes[marketId] || [])];
+    outcomesClone[outcomeIndex] = newOutcome;
     return {
       ...state,
-      error: payload.error
+      ...{
+        market: { ...state.market, ...{ [eventId]: marketsClone } },
+        outcomes: { ...state.outcomes, ...{ [marketId]: outcomesClone } },
+      }
     };
-  case SELECT_EVENT:
+  },
+
+  [OUTCOME_STATUS]: (
+    state,
+    {
+      payload: {
+        status, marketId, outcomeId
+      }
+    }
+  ) => {
+    const outcomeIndex = state.outcomes[marketId].findIndex(outcome => outcome.outcomeId === outcomeId);
+    const newOutcome = { ...state.outcomes[marketId][outcomeIndex], ...{ status } };
+    const outcomesClone = [...(state.outcomes[marketId] || [])];
+    outcomesClone[outcomeIndex] = newOutcome;
     return {
       ...state,
-      selectedFootballEventId: payload.eventId
+      ...{
+        outcomes: { ...state.outcomes, ...{ [marketId]: outcomesClone } },
+      }
     };
-  case TOGGLE_PRICE_FORMAT:
+  },
+
+  [MARKET_STATUS]: (
+    state,
+    {
+      payload: {
+        status, marketId, eventId
+      }
+    }
+  ) => {
+    const marketIndex = state.markets[eventId].findIndex(market => market.marketId === marketId);
+    const newMarket = { ...state.markets[eventId][marketIndex], ...{ status } };
+    const marketsClone = [...state.markets[eventId]];
+    marketsClone[marketIndex] = newMarket;
     return {
       ...state,
-      isDecimalFormat: !state.isDecimalFormat
+      ...{
+        market: { ...state.market, ...{ [eventId]: marketsClone } }
+      }
     };
-  case TOGGLE_PRIMARY_MARKET:
-    return {
-      ...state,
-      showPrimaryMarket: !state.showPrimaryMarket
-    };
-  case FETCH_MARKET:
-    return {
-      ...state,
-      marketsBeingFetched: [...state.marketsBeingFetched, payload.marketId]
-    };
-  case FINISHED_FETCHING_MARKET:
-    return {
-      ...state,
-      footballEventData: {
-        ...state.footballEventData,
-        ...{
-          outcomes: {
-            ...state.footballEventData.outcomes,
-            ...payload.data.outcomes
-          }
-        }
-      },
-      marketsBeingFetched: state.marketsBeingFetched.filter(marketId => marketId !== payload.data.market.marketId)
-    };
-  default:
-    return state;
-  }
+  },
+};
+
+export default (state = initialState, action) => {
+  const handler = ACTION_HANDLERS[action.type];
+  return handler ? handler(state, action) : state;
 };
 

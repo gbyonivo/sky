@@ -1,10 +1,3 @@
-export const attachPricesToEvents = (events, markets, outcomes) => // eslint-disable-line
-  events.map(event => ({
-    ...event,
-    prices: outcomes[markets[event.eventId][0].marketId]
-      .reduce((acc, next) => ({ ...acc, [next.type]: next.price }), {})
-  }));
-
 export const groupEvents = (events) => {
   let groups = { typeName: {}, linkedEventTypeName: {} };
   let allHaveLinkedTypeName = true;
@@ -51,3 +44,10 @@ export const getPriceTextAndValueForWDW = outcome => ({
 export const getIdFromParam = () => parseInt(window.location.href.split('/').pop(), 10); // eslint-disable-line
 
 export const getIsViewingEvent = () => Number.isInteger(getIdFromParam());
+
+export const attachOutcomesToEvents = (events, markets, outcomes) => // eslint-disable-line
+  events.map(event => ({
+    ...event,
+    primaryMarketId: markets[event.eventId][0].marketId,
+    primaryOutcomeIds: outcomes[markets[event.eventId][0].marketId].map(({ outcomeId }) => outcomeId)
+  }));

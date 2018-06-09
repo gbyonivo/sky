@@ -5,11 +5,27 @@ import { connect } from 'react-redux';
 import styles from './price.scss'; // eslint-disable-line
 
 const Price = ({
-  price, suffixText, isDecimalFormat, className, type
+  price, suffixText, isDecimalFormat, className, type, status
 }) =>
-  <div className={`${styles.price} ${styles[type]} ${className}`}>
+  <div className={`
+    ${styles.price}
+    ${styles[type]}
+    ${className}
+    ${status.suspended ? styles.suspended : ''}`
+  }>
     <span className={styles.text}>{suffixText}</span>
-    <span className={styles.priceValue}>{(isDecimalFormat) ? (Math.round(price.decimal * 100) / 100) : `${price.num}/${price.den}`}</span>
+    {
+      status.active
+        ? <span className={styles.priceValue}>
+          {status.suspended // eslint-disable-line
+            ? 'Susp'
+            : isDecimalFormat
+              ? (Math.round(price.decimal * 100) / 100)
+              : `${price.num}/${price.den}`
+          }
+        </span>
+        : <span className={styles.priceValue}>-</span>
+    }
   </div>;
 
 Price.defaultProps = {
@@ -19,11 +35,13 @@ Price.defaultProps = {
     den: 0
   },
   className: '',
-  type: 'long'
+  type: 'long',
+  status: { active: true }
 };
 
 Price.propTypes = {
   price: PropTypes.object.isRequired,
+  status: PropTypes.object.isRequired,
   suffixText: PropTypes.string.isRequired,
   className: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,

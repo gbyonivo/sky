@@ -14,9 +14,9 @@ const CorrectScoreOutcomes = ({ outcomes }) => <table className={styles.correctS
       const draw = outcomes.draw[index];
       const away = outcomes.away[index];
       return (<tr key={index}>
-        <td>{ home ? <Price {...getPriceTextAndValue(home)} type="correctScore"/> : '-'}</td>
-        <td>{ draw ? <Price {...getPriceTextAndValue(draw)} type="correctScore"/> : '-'}</td>
-        <td>{ away ? <Price {...getPriceTextAndValue(away)} type="correctScore"/> : '-'}</td>
+        <td>{ home ? <Price {...getPriceTextAndValue(home)} type="correctScore" status={home.status}/> : '-'}</td>
+        <td>{ draw ? <Price {...getPriceTextAndValue(draw)} type="correctScore" status={draw.status}/> : '-'}</td>
+        <td>{ away ? <Price {...getPriceTextAndValue(away)} type="correctScore" status={away.status}/> : '-'}</td>
       </tr>);
     })}
   </tbody>

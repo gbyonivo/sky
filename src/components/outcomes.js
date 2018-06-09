@@ -16,7 +16,7 @@ const Outcomes = ({ outcomes, marketType }) => {
     return (<div>
       {
         outcomes.map(outcome =>
-          <Price suffixText={outcome.name} price={outcome.price} key={outcome.outcomeId} />)
+          <Price suffixText={outcome.name} price={outcome.price} key={outcome.outcomeId} status={outcome.status}/>)
       }
     </div>);
   }

@@ -12,7 +12,7 @@ import {
   FETCH_MARKET,
   ERROR_FETCHING_MARKET
 } from '../constants/actionTypes';
-import { attachPricesToEvents } from '../functions';
+import { attachOutcomesToEvents } from '../functions';
 
 export const fetchFootballEvents = () => ({
   type: FETCH_FOOTBALL_EVENTS
@@ -20,7 +20,7 @@ export const fetchFootballEvents = () => ({
 
 export const finishedFetchingFootballEvents = (events, markets, outcomes) => ({
   type: FINISHED_FETCHING_EVENTS,
-  payload: { events: attachPricesToEvents(events, markets, outcomes) }
+  payload: { events: attachOutcomesToEvents(events, markets, outcomes), markets, outcomes }
 });
 
 export const errorFetchingFootballEvents = error => ({
@@ -72,3 +72,16 @@ export const errorFetchingMarket = error => ({
   type: ERROR_FETCHING_MARKET,
   payload: { error }
 });
+
+export const messageReceived = (message) => {
+  const data = JSON.parse(message.data);
+  if (!data.type) {
+    return { type: '' };
+  }
+  return {
+    type: data.type,
+    payload: {
+      ...data.data
+    }
+  };
+};

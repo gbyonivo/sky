@@ -1,6 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
-
 const htmlPlugin = new HtmlWebpackPlugin({
   template: './src/index.html',
   filename: 'index.html'
@@ -15,6 +14,13 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader'
+        }
+      },
+      {
+        test: /\.json$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'json-loader' 
         }
       },
       {
@@ -44,6 +50,10 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
+  },
+  node: {
+    net: "empty",
+    tls: "empty"
   },
   plugins: [htmlPlugin]
 }

@@ -19,17 +19,17 @@ class FootballEventDetails extends Component {
     }
   }
   render() {
-    const { footballEventData, isFetchingFootballEvent, match: { params: { id } } } = this.props;
+    const { event, isFetchingFootballEvent, match: { params: { id } } } = this.props;
     return (<div className={styles.footballEventDetails}>
       <h2 className={styles.footballEventDetailsHeader}>
         {
-          isFetchingFootballEvent || !footballEventData.event
+          isFetchingFootballEvent || !event
             ? 'Event Details'
-            : footballEventData.event.name
+            : event.name
         }
       </h2>
       {
-        isFetchingFootballEvent || !footballEventData.event
+        isFetchingFootballEvent || !event
           ? <Loading />
           : <Markets eventId={parseInt(id, 10)} />
       }
@@ -38,14 +38,14 @@ class FootballEventDetails extends Component {
 }
 
 FootballEventDetails.propTypes = {
-  footballEventData: PropTypes.object.isRequired,
+  event: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
   isFetchingFootballEvent: PropTypes.bool.isRequired,
   fetchFootballEvent: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({ footballEventsReducer: { footballEventData, isFetchingFootballEvent } }) => ({
-  footballEventData,
+const mapStateToProps = ({ footballEventsReducer: { event, isFetchingFootballEvent } }) => ({
+  event,
   isFetchingFootballEvent
 });
 

@@ -5,16 +5,22 @@ import { Link } from 'react-router-dom';
 import Price from './price';
 
 import styles from './footballEventsMenuItem.scss';
+import { selectShowPrimaryMarket, selectPrimaryOutcomes } from '../selectors';
 
-const FootballEventsMenuItem = ({ footballEvent, showPrimaryMarket, hideList }) =>
+const FootballEventsMenuItem = ({
+  footballEvent, showPrimaryMarket, hideList, primaryOutcomes
+}) =>
   <li className={styles.footballEventsMenuItem}>
     <Link to={`/event/${footballEvent.eventId}`} onClick={hideList}>
       <div className={styles.footballEventsMenuItemName}>{footballEvent.name}</div>
       {showPrimaryMarket
         ? <div className={styles.footballEventsMenuItemPrices}>
-          <div className={styles.price}><Price price={footballEvent.prices.home} suffixText="Win" type={'short'} /></div>
-          <div className={styles.price}><Price price={footballEvent.prices.draw} suffixText="Draw" type={'short'} /></div>
-          <div className={styles.price}><Price price={footballEvent.prices.away} suffixText="Win" type={'short'} /></div>
+          {
+            primaryOutcomes.map(outcome =>
+              <div className={styles.price} key={outcome.outcomeId}>
+                <Price price={outcome.price} suffixText={outcome.type} type={'short'} />
+              </div>)
+          }
         </div>
         : null
       }
@@ -24,13 +30,13 @@ const FootballEventsMenuItem = ({ footballEvent, showPrimaryMarket, hideList }) 
 FootballEventsMenuItem.propTypes = {
   footballEvent: PropTypes.object.isRequired,
   hideList: PropTypes.func.isRequired,
+  primaryOutcomes: PropTypes.array.isRequired,
   showPrimaryMarket: PropTypes.bool.isRequired
 };
 
-const mapStateToProps = ({ footballEventsReducer: { showPrimaryMarket } }) => ({
-  showPrimaryMarket
+const mapStateToProps = (state, props) => ({
+  showPrimaryMarket: selectShowPrimaryMarket(state),
+  primaryOutcomes: selectPrimaryOutcomes(state, props.footballEvent)
 });
 
-const mapActionToProps = () => ({});
-
-export default connect(mapStateToProps, mapActionToProps)(FootballEventsMenuItem);
+export default connect(mapStateToProps)(FootballEventsMenuItem);
