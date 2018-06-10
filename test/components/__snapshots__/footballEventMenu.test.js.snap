@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FootballEventsMenu should render correctly 1`] = `
+<div
+  className="
+      footballEventsMenu
+      isExpanded
+      onlyListOnScreen"
+>
+  <h2
+    className="footballEventsMenuHeader"
+  >
+    Football Events
+  </h2>
+  <div
+    className="priceFormatToggle"
+  >
+    <div
+      className="text"
+      style={
+        Object {
+          "color": "#ff6464",
+        }
+      }
+    >
+      Fraction Price
+    </div>
+    <div
+      className="toggle switch on"
+      onClick={[Function]}
+    >
+      <div
+        className="ball left"
+      />
+    </div>
+    <div
+      className="text"
+      style={
+        Object {
+          "color": "#36d836",
+        }
+      }
+    >
+      Decimal Price
+    </div>
+  </div>
+  <div
+    className="showPrimaryMarketToggle"
+  >
+    <div
+      className="text"
+    >
+      Display Primary Market
+    </div>
+    <div
+      className="toggle switch off"
+      onClick={[Function]}
+    >
+      <div
+        className="ball right"
+      />
+    </div>
+  </div>
+  <div
+    className="footballEventsGroups"
+  />
+</div>
+`;

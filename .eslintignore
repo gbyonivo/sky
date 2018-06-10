@@ -5,3 +5,4 @@ coverage
 **/webpack.config*
 test/mock/**
 eslint_config
+jestFileTransformer.js

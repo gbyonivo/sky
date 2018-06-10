@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Price component renders correctly 1`] = `
+<div
+  className="
+    price
+    short
+    blue
+    suspended"
+>
+  <span
+    className="text"
+  >
+    Sky
+  </span>
+  <span
+    className="priceValue"
+  >
+    -
+  </span>
+</div>
+`;
