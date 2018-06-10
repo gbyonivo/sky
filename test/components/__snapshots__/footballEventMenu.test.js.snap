@@ -17,13 +17,28 @@ exports[`FootballEventsMenu should render correctly 1`] = `
   >
     <div
       className="text"
-      style={
-        Object {
-          "color": "#ff6464",
-        }
-      }
     >
-      Fraction Price
+      <span
+        className=""
+        style={
+          Object {
+            "color": "#ff6464",
+          }
+        }
+      >
+        Decimal Price
+      </span>
+      / 
+      <span
+        className="selected"
+        style={
+          Object {
+            "color": "#36d836",
+          }
+        }
+      >
+        Fraction Price 
+      </span>
     </div>
     <div
       className="toggle switch on"
@@ -32,16 +47,6 @@ exports[`FootballEventsMenu should render correctly 1`] = `
       <div
         className="ball left"
       />
-    </div>
-    <div
-      className="text"
-      style={
-        Object {
-          "color": "#36d836",
-        }
-      }
-    >
-      Decimal Price
     </div>
   </div>
   <div

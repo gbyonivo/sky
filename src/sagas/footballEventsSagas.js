@@ -7,13 +7,14 @@ import {
   finishedFetchingMarket,
   errorFetchingMarket,
   messageReceived,
+  errorFetchingFootballEvent,
 } from '../actions';
 import { FETCH_FOOTBALL_EVENT, FETCH_MARKET, FINISHED_FETCHING_EVENT } from '../constants/actionTypes';
 import connectSocket from '../api/websocket';
 import { selectOutcomes } from '../selectors';
 import { MARKET } from '../constants/subscriptionTypes';
 
-function* subscribe() {
+export function* subscribe() {
   const outcomes = yield select(selectOutcomes);
   const socketChannel = yield call(
     connectSocket,
@@ -33,7 +34,7 @@ export function* fetchFootballEventsSaga() {
     const data = yield call(fetchFootballEventsFromApi);
     yield put(finishedFetchingFootballEvents(data.events, data.markets, data.outcomes));
   } catch (error) {
-    yield put(errorFetchingFootballEvents(error));
+    yield put(errorFetchingFootballEvents('error loading events'));
   }
 }
 
@@ -42,7 +43,7 @@ export function* fetchFootballEventSaga({ payload: { eventId } }) {
     const data = yield call(fetchFootballEventFromApi, eventId);
     yield put(finishedFetchingFootballEvent(data));
   } catch (error) {
-    yield put(errorFetchingFootballEvents(error));
+    yield put(errorFetchingFootballEvent('error loading football event'));
   }
 }
 

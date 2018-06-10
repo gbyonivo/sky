@@ -9,9 +9,11 @@ import styles from './priceFormatToggle.scss';
 
 const PriceFormatToggle = ({ isDecimalFormat, togglePriceFormat }) =>
   <div className={styles.priceFormatToggle}>
-    <div className={styles.text} style={{ color: '#ff6464' }}>Fraction Price</div>
+    <div className={styles.text}>
+      <span className={!isDecimalFormat ? styles.selected : ''} style={{ color: '#ff6464' }}>Decimal Price</span>
+      / <span className={isDecimalFormat ? styles.selected : ''} style={{ color: '#36d836' }}>Fraction Price </span>
+    </div>
     <Switch value={isDecimalFormat} onClick={togglePriceFormat} className={styles.toggle}/>
-    <div className={styles.text} style={{ color: '#36d836' }}>Decimal Price</div>
   </div>;
 
 PriceFormatToggle.defaultProps = {

@@ -33,7 +33,7 @@ class FootballEventsMenu extends Component {
     }>
       {
         isViewingEvent
-          ? <div onClick={this.toggle} className={styles.toggle}>Live Events</div>
+          ? <div onClick={() => this.toggle()} className={styles.toggle}>Live Events</div>
           : null
       }
       <h2 className={styles.footballEventsMenuHeader}>Football Events</h2>

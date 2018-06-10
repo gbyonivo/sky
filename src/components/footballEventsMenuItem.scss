@@ -5,9 +5,25 @@
   min-height: 25px;
   a{
     text-decoration: none;
-    text-align: center;
+    // text-align: center;
+    .startTime{
+      font-size: 11px;
+      margin-right: 10px;
+      text-align: center;
+      width: 40px;
+    }
+    .name{
+      font-weight: bolder;
+      width: calc(100% - 70px);
+    }
     .footballEventsMenuItemName{
-      padding: 5px 0 5px 0;
+      padding: 10px 0 5px 0;
+      color: #000;
+      height: 25px;
+      .startTime, .name{
+        float: left;
+        text-align: center;
+      }
     }
   }
   .footballEventsMenuItemPrices{

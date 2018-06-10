@@ -7,6 +7,7 @@ import Loading from './loading';
 import Markets from './markets';
 
 import styles from './footballEventDetails.scss';
+import { getStartTime } from '../functions';
 
 class FootballEventDetails extends Component {
   componentDidMount() {
@@ -25,7 +26,7 @@ class FootballEventDetails extends Component {
         {
           isFetchingFootballEvent || !event
             ? 'Event Details'
-            : event.name
+            : `${getStartTime(event.startTime)} ${event.name}`
         }
       </h2>
       {

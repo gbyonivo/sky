@@ -1,3 +1,5 @@
+import dateFns from 'date-fns';
+
 export const groupEvents = (events) => {
   let groups = { typeName: {}, linkedEventTypeName: {} };
   let allHaveLinkedTypeName = true;
@@ -52,3 +54,5 @@ export const attachOutcomesToEvents = (events, markets, outcomes) => // eslint-d
     primaryMarketId: markets[event.eventId][0].marketId,
     primaryOutcomeIds: outcomes[markets[event.eventId][0].marketId].map(({ outcomeId }) => outcomeId)
   }));
+
+export const getStartTime = startDate => dateFns.format(new Date(startDate), 'HH:mm');

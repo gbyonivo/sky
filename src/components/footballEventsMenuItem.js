@@ -6,13 +6,17 @@ import Price from './price';
 
 import styles from './footballEventsMenuItem.scss';
 import { selectShowPrimaryMarket, selectPrimaryOutcomes } from '../selectors';
+import { getStartTime } from '../functions';
 
 const FootballEventsMenuItem = ({
   footballEvent, showPrimaryMarket, hideList, primaryOutcomes
 }) =>
   <li className={styles.footballEventsMenuItem}>
     <Link to={`/event/${footballEvent.eventId}`} onClick={hideList}>
-      <div className={styles.footballEventsMenuItemName}>{footballEvent.name}</div>
+      <div className={styles.footballEventsMenuItemName}>
+        <div className={styles.startTime}>{getStartTime(footballEvent.startTime)}</div>
+        <div className={styles.name}>{footballEvent.name}</div>
+      </div>
       {showPrimaryMarket
         ? <div className={styles.footballEventsMenuItemPrices}>
           {
