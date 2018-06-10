@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Market component renders correctly 1`] = `
+<div
+  className="isCollapsed market"
+>
+  <h4
+    className="marketHeader"
+    onClick={[Function]}
+  >
+    Water Flow Villa
+  </h4>
+  <div>
+    <div
+      className="
+    price
+    long
+    
+    suspended"
+    >
+      <span
+        className="text"
+      >
+        nigeria tops group
+      </span>
+      <span
+        className="priceValue"
+      >
+        Susp
+      </span>
+    </div>
+    <div
+      className="
+    price
+    long
+    
+    "
+    >
+      <span
+        className="text"
+      >
+        liverpool win prem league
+      </span>
+      <span
+        className="priceValue"
+      >
+        2/10
+      </span>
+    </div>
+  </div>
+</div>
+`;

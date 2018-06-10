@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FootballEventDetails component renders correctly 1`] = `
+<div
+  className="footballEventDetails"
+>
+  <h2
+    className="footballEventDetailsHeader"
+  >
+    Event Details
+  </h2>
+  <div>
+    loading
+  </div>
+</div>
+`;

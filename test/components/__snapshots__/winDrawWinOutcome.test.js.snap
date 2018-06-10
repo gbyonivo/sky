@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CorrectScoreOutcomes component renders correctly 1`] = `
+<table
+  className="winDrawWinOutcome"
+>
+  <tbody>
+    <tr>
+      <td>
+        <div
+          className="
+    price
+    correctScore
+    
+    "
+        >
+          <span
+            className="text"
+          >
+            home
+          </span>
+          <span
+            className="priceValue"
+          >
+            3/7
+          </span>
+        </div>
+      </td>
+      <td>
+        <div
+          className="
+    price
+    correctScore
+    
+    "
+        >
+          <span
+            className="text"
+          >
+            draw
+          </span>
+          <span
+            className="priceValue"
+          >
+            4/2
+          </span>
+        </div>
+      </td>
+      <td>
+        <div
+          className="
+    price
+    correctScore
+    
+    "
+        >
+          <span
+            className="text"
+          >
+            away
+          </span>
+          <span
+            className="priceValue"
+          >
+            1/8
+          </span>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;

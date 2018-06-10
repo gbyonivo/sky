@@ -25,6 +25,7 @@ export const groupEvents = (events) => {
 export const groupCorrectScoreOutcomes = (outcomes, groups = { home: [], away: [], draw: [] }) =>
   outcomes.reduce((acc, current) => ({ ...acc, ...{ [current.type]: [...acc[current.type], current] } }), groups);
 
+// todo: refactor
 export const largestArrayLength = outcomes =>
   [outcomes.home.length, outcomes.draw.length, outcomes.away.length]
     .sort((a, b) => a - b)

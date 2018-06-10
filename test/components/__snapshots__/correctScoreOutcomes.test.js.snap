@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CorrectScoreOutcomes component renders correctly 1`] = `
+<table
+  className="correctScoreOutcomes"
+>
+  <thead>
+    <tr>
+      <th>
+        Home
+      </th>
+      <th>
+        Draw
+      </th>
+      <th>
+        Away
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <div
+          className="
+    price
+    correctScore
+    
+    "
+        >
+          <span
+            className="text"
+          >
+            4 - 1
+          </span>
+          <span
+            className="priceValue"
+          >
+            -
+          </span>
+        </div>
+      </td>
+      <td>
+        <div
+          className="
+    price
+    correctScore
+    
+    "
+        >
+          <span
+            className="text"
+          >
+            7 - 7
+          </span>
+          <span
+            className="priceValue"
+          >
+            -
+          </span>
+        </div>
+      </td>
+      <td>
+        <div
+          className="
+    price
+    correctScore
+    
+    "
+        >
+          <span
+            className="text"
+          >
+            1 - 7
+          </span>
+          <span
+            className="priceValue"
+          >
+            -
+          </span>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;

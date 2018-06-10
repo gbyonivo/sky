@@ -91,7 +91,7 @@ const ACTION_HANDLERS = {
     return {
       ...state,
       ...{
-        market: { ...state.market, ...{ [eventId]: marketsClone } },
+        markets: { ...state.markets, ...{ [eventId]: marketsClone } },
         outcomes: { ...state.outcomes, ...{ [marketId]: outcomesClone } },
       }
     };

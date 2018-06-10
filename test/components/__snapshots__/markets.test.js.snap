@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Markets component renders correctly 1`] = `
+<div
+  className="markets"
+>
+  <div
+    className="isCollapsed market"
+  >
+    <h4
+      className="marketHeader"
+      onClick={[Function]}
+    >
+      Sand Village Market
+    </h4>
+    <div>
+      <div
+        className="
+    price
+    long
+    
+    suspended"
+      >
+        <span
+          className="text"
+        >
+          bitter ramos on salah
+        </span>
+        <span
+          className="priceValue"
+        >
+          Susp
+        </span>
+      </div>
+      <div
+        className="
+    price
+    long
+    
+    "
+      >
+        <span
+          className="text"
+        >
+          sign fekir!
+        </span>
+        <span
+          className="priceValue"
+        >
+          2/10
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
