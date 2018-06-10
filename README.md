@@ -1,6 +1,15 @@
 # Sky Pluto
 
-Sky Pluto is simple application that reads betting data from an api and simulates to an extents the behaviour of a betting site using React, Redux Sagas, Websockets, CSSModules and Jest for testing.
+Sky Pluto is simple application that reads betting data from an api and simulates to an extents the behaviour of a betting site.
+
+## Technologies Used
+React,
+
+Redux Sagas for handling data, api calls and websocket feeds, Websockets,
+
+CSSModules to maanage my style sheets,
+
+Jest for testing.
 
 ## Getting Started
 
